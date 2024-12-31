@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Love Support ✨</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #ff6b8b;
+        --secondary: #7f50ff;
+        --accent: #00d4ff;
+        --bg: #0a0a1f;
+        --text: #ffffff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--text);
+        overflow-x: hidden;
+        background: linear-gradient(135deg, #0a0a1f 0%, #1a1a3f 100%);
+      }
+
+      .noise {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAElBMVEUAAAD8/vz08vT09PT8+vz///+Yqd4MAAAABXRSTlMA2kCAv5rVihIAAABCSURBVDjLY2AYBaNg2AJGRkYGDEQERpwK0AARSQBxg8Pw0YBRXQ0MDAwUAKzuokLwH1YX4XEQNYK/Q0hAQb9jGAQAWvcm6O+IWnYAAAAASUVORK5CYII=");
+        opacity: 0.05;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: clamp(10px, 3vw, 20px);
+        position: relative;
+        z-index: 2;
+      }
+
+      .header {
+        text-align: center;
+        padding: clamp(30px, 5vw, 60px) 0;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: clamp(30px, 5vw, 60px);
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          45deg,
+          var(--primary),
+          var(--secondary),
+          var(--accent)
+        );
+        animation: rotate 20s linear infinite;
+        opacity: 0.1;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        margin-bottom: clamp(10px, 2vw, 20px);
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 30px rgba(255, 107, 139, 0.3);
+        padding: 0 15px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+        gap: clamp(15px, 3vw, 30px);
+        margin-top: clamp(20px, 4vw, 40px);
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: clamp(10px, 2vw, 20px);
+        padding: clamp(20px, 3vw, 30px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .glass-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .love-counter {
+        text-align: center;
+      }
+
+      .heart-btn {
+        font-size: clamp(40px, 8vw, 60px);
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        margin: clamp(10px, 2vw, 20px) 0;
+        position: relative;
+      }
+
+      .mood-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+        gap: clamp(10px, 2vw, 15px);
+      }
+
+      .mood {
+        font-size: clamp(30px, 6vw, 40px);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        padding: clamp(10px, 2vw, 15px);
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .message-card {
+        position: relative;
+        overflow: hidden;
+        font-size: clamp(1rem, 2vw, 1.1rem);
+        line-height: 1.6;
+      }
+
+      #message-container {
+        min-height: 80px;
+        margin: 15px 0;
+      }
+
+      .btn {
+        width: 100%;
+        padding: clamp(12px, 2vw, 15px) clamp(20px, 4vw, 30px);
+        border: none;
+        border-radius: 30px;
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .quote {
+        text-align: center;
+        margin-top: clamp(30px, 5vw, 60px);
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.7);
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 15px;
+        font-size: clamp(0.9rem, 2vw, 1rem);
+      }
+
+      /* Tablet Styles */
+      @media (min-width: 768px) and (max-width: 1024px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .message-card {
+          grid-column: 1 / -1;
+        }
+      }
+
+      /* Mobile Styles */
+      @media (max-width: 767px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .mood-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .header p {
+          font-size: 0.9rem;
+        }
+      }
+
+      /* Landscape Mode */
+      @media (max-height: 500px) and (orientation: landscape) {
+        .header {
+          padding: 20px 0;
+        }
+
+        .grid {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+      }
+
+      /* Dark Mode Support */
+      @media (prefers-color-scheme: dark) {
+        .glass-card {
+          background: rgba(255, 255, 255, 0.03);
+        }
+      }
+
+      /* High DPI Screens */
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .noise {
+          background-size: 50%;
+        }
+      }
+    </style>
+  </head>
+  <!-- Body section remains the same -->
+  <body>
+    <!-- Previous body content remains unchanged -->
+    <div class="noise"></div>
+    <div class="container">
+      <div class="header">
+        <h1>✨ Semangat Sayang! ✨</h1>
+        <p>Aku Selalu Ada Untukmu</p>
+      </div>
+
+      <div class="grid">
+        <div class="glass-card love-counter">
+          <h3>Love Meter</h3>
+          <button class="heart-btn" onclick="sendLove()">❤️</button>
+          <p>Klik untuk kirim cinta!</p>
+        </div>
+
+        <div class="glass-card">
+          <h3>Mood Hari Ini</h3>
+          <div class="mood-grid">
+            <div class="mood" onclick="trackMood('🥰')">🥰</div>
+            <div class="mood" onclick="trackMood('😊')">😊</div>
+            <div class="mood" onclick="trackMood('😴')">😴</div>
+            <div class="mood" onclick="trackMood('🤗')">🤗</div>
+          </div>
+        </div>
+
+        <div class="glass-card message-card">
+          <h3>Pesan Untukmu</h3>
+          <div id="message-container">
+            <p>Klik tombol di bawah untuk mendapat semangat ❤️</p>
+          </div>
+          <button class="btn" onclick="showMessage()">
+            <i class="fas fa-heart"></i> Klik Me
+          </button>
+        </div>
+      </div>
+
+      <div class="quote">
+        "Setiap langkah kerjamu adalah langkah menuju masa depan kita yang lebih
+        indah"
+        <br />- Your Love 💕
+      </div>
+    </div>
+
+    <!-- Previous JavaScript remains unchanged -->
+    <script>
+      // Previous JavaScript code remains the same
+      const messages = [
+        "Kamu adalah Wanitaku. 💝",
+        "Jangan lupa istirahat ya sayang, jangan terlalu lelah~ 🌟",
+        "Aku bangga sama semua usahamu! ✨",
+        "Ingat makan siang ya! Jaga kesehatan selalu 🍱",
+        "Kamu sudah bekerja sangat keras hari ini! 💪",
+        "Jangan lupa minum air putih ya sayangku! 💧",
+        "Semangat terus! Aku selalu mendukungmu 🥰",
+        "Kamu adalah alasan aku tersenyum setiap hari! 😊",
+        "Jangan lupa untuk tersenyum hari ini ya! ✨",
+        "Kamu adalah orang terhebat yang pernah aku temui! ❤️",
+        "Dan Kamu juga adalah pasanganku yang pintar dan imut ❤️❤️❤️",
+      ];
+
+      function sendLove() {
+        for (let i = 0; i < 8; i++) {
+          setTimeout(() => {
+            const heart = document.createElement("div");
+            heart.className = "floating-hearts";
+            heart.innerHTML = ["❤️", "💖", "💕", "💗"][
+              Math.floor(Math.random() * 4)
+            ];
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.animationDuration = `${1.5 + Math.random()}s`;
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 2000);
+          }, i * 100);
+        }
+      }
+
+      function showMessage() {
+        const container = document.getElementById("message-container");
+        const message = document.createElement("p");
+        message.style.opacity = "0";
+        message.style.transform = "translateY(20px)";
+        message.style.transition = "all 0.5s ease";
+        message.innerHTML =
+          messages[Math.floor(Math.random() * messages.length)];
+
+        if (container.children.length > 2) {
+          container.removeChild(container.firstChild);
+        }
+
+        container.appendChild(message);
+        requestAnimationFrame(() => {
+          message.style.opacity = "1";
+          message.style.transform = "translateY(0)";
+        });
+      }
+
+      function trackMood(mood) {
+        const container = document.getElementById("message-container");
+        const message = document.createElement("p");
+        message.style.opacity = "0";
+        message.style.transform = "translateY(20px)";
+        message.style.transition = "all 0.5s ease";
+        message.innerHTML = `Mood kamu hari ini: ${mood}`;
+
+        if (container.children.length > 2) {
+          container.removeChild(container.firstChild);
+        }
+
+        container.appendChild(message);
+        requestAnimationFrame(() => {
+          message.style.opacity = "1";
+          message.style.transform = "translateY(0)";
+        });
+
+        showEmoji();
+      }
+
+      function showEmoji() {
+        const emojis = ["✨", "💖", "🌟", "💕", "🎈", "🌸", "💝", "✨"];
+        for (let i = 0; i < 12; i++) {
+          setTimeout(() => {
+            const emoji = document.createElement("div");
+            emoji.className = "emoji-rain";
+            emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = `${Math.random() * 100}vw`;
+            emoji.style.animationDuration = `${2 + Math.random() * 2}s`;
+            document.body.appendChild(emoji);
+
+            setTimeout(() => emoji.remove(), 3000);
+          }, i * 150);
+        }
+      }
+
+      // Initial animation
+      showEmoji();
+    </script>
+  </body>
+</html>
